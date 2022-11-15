@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class DoAnimationTrigger : MonoBehaviour {
-	public string trigger = null;
+    public string trigger;
 
-	void Start () {
-		GetComponent<Animator>().SetBool(trigger, true);
-	}
+    private void Start() {
+        GetComponent<Animator>().SetBool(trigger, true);
+    }
 }
