@@ -5,7 +5,7 @@ then
 else
 id=$1
 shift
-#screen \
+screen \
 mlagents-learn \
 Assets/Dino.yaml \
 --env=./build/LINUX_SERVER_DINO/dino-ml-training.x86_64 \
