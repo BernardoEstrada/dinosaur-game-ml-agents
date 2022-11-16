@@ -23,3 +23,5 @@ public class SwapColorsAtNight : MonoBehaviour {
         curves.blueChannel.MoveKey(1, new Keyframe(1, 1 - currentPhase));
     }
 }
+// Vector3(-24.2000008,-1.20000005,-46.7000008)
+// Quaternion(-0.0412174426,0.174624234,-0.00734671578,0.983744621)

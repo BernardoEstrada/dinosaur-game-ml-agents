@@ -2,12 +2,16 @@
 
 public class SpawnObstacles : MonoBehaviour {
     public Level level;
-    private readonly string[] obstacleHistory = { null, null };
+    private string[] obstacleHistory = { null, null };
     private float distance;
     private int obstacleHistoryIndex;
     private float spawnAt;
 
     private void Start() {
+        distance = 0f;
+        spawnAt = 0f;
+    }
+    public void Restart() {
         distance = 0f;
         spawnAt = 0f;
     }
@@ -21,7 +25,6 @@ public class SpawnObstacles : MonoBehaviour {
     private void SpawnObstacle() {
         int obstacleIndex;
         ObstacleStuff obstacleStuff = null;
-        string uniqueName;
         do {
             obstacleIndex = Random.Range(0, level.obstacles.Length);
             obstacleStuff = level.obstacles[obstacleIndex].GetComponent<ObstacleStuff>();
@@ -32,7 +35,8 @@ public class SpawnObstacles : MonoBehaviour {
         obstacleHistoryIndex = (obstacleHistoryIndex + 1) % 2;
 
         var obstacle = Instantiate(level.obstacles[obstacleIndex]);
-        obstacle.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y, 0);
+        obstacle.transform.parent = transform.parent;
+        obstacle.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y, transform.position.z);
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 

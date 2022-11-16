@@ -15,12 +15,20 @@ public class Scores : MonoBehaviour {
     private int lastHundred;
     private Vector3 scoreStartPosition = Vector3.zero;
 
+    public int Score => score.Value;
+    public int HighScore => highScore.Value;
+    
     private void Awake() {
         highScore.Value = (int)highestScore;
     }
 
     private void Start() {
         flashScore.transform.position = score.transform.position + Vector3.up * 50;
+    }
+
+    public void Reset() {
+        highestScore = Mathf.Max(level.getDistance(), highestScore);
+        score.Value = 0;
     }
 
     private void Update() {

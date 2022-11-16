@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class JumpAndDuck : MonoBehaviour {
     public Level level;
@@ -10,6 +11,13 @@ public class JumpAndDuck : MonoBehaviour {
     private readonly float gravity = 144f;
     private Animator animator;
     private bool ducking;
+
+    public bool Ducking => ducking;
+
+    public bool Grounded => grounded;
+
+    public float JumpVelocity => jumpVelocity;
+
     private bool grounded = true;
     private float jumpVelocity;
     private Vector3 startVector;
@@ -18,6 +26,16 @@ public class JumpAndDuck : MonoBehaviour {
         animator = GetComponent<Animator>();
         standingCollider.enabled = true;
         duckingCollider.enabled = false;
+        level = transform.parent.GetComponentInChildren<Level>();
+        ground = transform.parent.Find("Ground").gameObject;
+    }
+
+    public void Reset() {
+        standingCollider.enabled = true;
+        duckingCollider.enabled = false;
+        animator.SetBool("jumping", false);
+        animator.SetBool("ducking", false);
+        animator.SetBool("hit", false);
     }
 
     private void Update() {
@@ -30,7 +48,7 @@ public class JumpAndDuck : MonoBehaviour {
                 stand();
         }
         else {
-            transform.position += jumpVelocity * Vector3.up * Time.deltaTime;
+            transform.position += Time.deltaTime * jumpVelocity * Vector3.up;
             jumpVelocity -= gravity * Time.deltaTime;
 
             if (transform.position.y < ground.transform.position.y) {
@@ -60,7 +78,7 @@ public class JumpAndDuck : MonoBehaviour {
         }
     }
 
-    private void jump() {
+    public void jump() {
         if (!grounded) return;
 
         stand();
@@ -71,7 +89,7 @@ public class JumpAndDuck : MonoBehaviour {
         animator.SetBool("jumping", true);
     }
 
-    private void duck() {
+    public void duck() {
         if (ducking || !grounded) return;
 
         standingCollider.enabled = false;
@@ -80,7 +98,7 @@ public class JumpAndDuck : MonoBehaviour {
         animator.SetBool("ducking", true);
     }
 
-    private void stand() {
+    public void stand() {
         if (!ducking) return;
 
         standingCollider.enabled = true;

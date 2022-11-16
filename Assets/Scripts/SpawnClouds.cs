@@ -22,8 +22,9 @@ public class SpawnClouds : MonoBehaviour {
 
     private void SpawnCloud() {
         var obstacle = Instantiate(cloud);
+        obstacle.transform.parent = transform.parent;
         obstacle.transform.position = new Vector3(transform.localScale.x / 2,
-            minimumCloudHeight + Random.value * (maximumCloudHeight - minimumCloudHeight), 0);
+            minimumCloudHeight + Random.value * (maximumCloudHeight - minimumCloudHeight), transform.position.z);
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 

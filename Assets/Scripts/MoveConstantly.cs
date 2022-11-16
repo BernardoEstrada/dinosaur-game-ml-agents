@@ -6,8 +6,16 @@ public class MoveConstantly : MonoBehaviour {
     public float restartAt = -5000;
 
     private void Update() {
-        transform.position += Vector3.left * Time.deltaTime * speedMultiplier;
+        transform.position +=  Time.deltaTime * speedMultiplier * Vector3.left;
         if (transform.position.x > restartAt) return;
         transform.position += Vector3.right * (startAt - restartAt);
+    }
+
+    public void Stop() {
+        speedMultiplier = 0;
+    }
+
+    public void Restart() {
+        speedMultiplier = 1;
     }
 }

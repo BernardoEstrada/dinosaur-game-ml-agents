@@ -7,7 +7,7 @@ public class AnimateTexture : MonoBehaviour {
     public float speedMultiplier = 1;
 
     private void Update() {
-        renderer.material.mainTextureOffset += direction.normalized * Time.deltaTime * level.mainSpeed *
-            speedMultiplier * renderer.material.mainTextureScale.x / transform.localScale.x;
+        renderer.material.mainTextureOffset += Time.deltaTime * level.mainSpeed *
+            speedMultiplier * renderer.material.mainTextureScale.x * direction.normalized / transform.localScale.x;
     }
 }

@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RestartTerrain : MonoBehaviour {
-    public SpriteRenderer renderer;
+    [FormerlySerializedAs("renderer")] public SpriteRenderer terrainSpriteRenderer;
     public int terrainOffset;
 
     private void Start() {
-        transform.position += terrainOffset * renderer.bounds.size.x * Vector3.right;
+        transform.position += terrainOffset * terrainSpriteRenderer.bounds.size.x * Vector3.right;
+    }
+    public void Reset() {
+        transform.position += terrainOffset * terrainSpriteRenderer.bounds.size.x * Vector3.right;
     }
 
     private void Update() {
-        if (transform.position.x > -renderer.bounds.size.x) return;
-        transform.position += 2 * renderer.bounds.size.x * Vector3.right;
+        if (transform.position.x > -terrainSpriteRenderer.bounds.size.x) return;
+        transform.position += 2 * terrainSpriteRenderer.bounds.size.x * Vector3.right;
     }
 }
