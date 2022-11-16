@@ -36,7 +36,7 @@ public class SpawnObstacles : MonoBehaviour {
 
         var obstacle = Instantiate(level.obstacles[obstacleIndex]);
         obstacle.transform.parent = transform.parent;
-        obstacle.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y, transform.position.z);
+        obstacle.transform.position = new Vector3(transform.localScale.x / 2 + transform.parent.position.x, transform.position.y, transform.position.z);
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 

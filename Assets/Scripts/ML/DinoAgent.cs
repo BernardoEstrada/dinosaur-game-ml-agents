@@ -9,10 +9,10 @@ using Unity.MLAgents.Sensors;
 
 namespace ML {
     public class DinoAgent : Agent {
-        public float rewardForStayingAlive = 1f;
+        public float rewardForStayingAlive = 10f;
         public float penaltyForDying = -1f;
-        public float penaltyForJumping = -0.01f;
-        public float penaltyForCrouching = -0.01f;
+        public float penaltyForJumping = -0.00002f;
+        public float penaltyForCrouching = -0.00002f;
         
 
         [HideInInspector]
@@ -86,6 +86,7 @@ namespace ML {
                 var scoreBias = (scores.Score > 0 && scores.HighScore > 0)
                     ? (scores.Score / (float)scores.HighScore)
                     : 1;
+                Debug.Log((rewardForStayingAlive / MaxStep) * scoreBias);
                 AddReward((rewardForStayingAlive / MaxStep) * scoreBias);
             }
         }
