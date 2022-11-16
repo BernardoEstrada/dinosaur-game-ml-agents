@@ -11,7 +11,7 @@ Assets/Dino.yaml \
 --env=./build/LINUX_SERVER_DINO/dino-ml-training.x86_64 \
 --num-envs=2 \
 --num-areas=30 \
---run-id={$id} \
+--run-id=$id \
 --no-graphics \
 --torch-device=cuda \
 $@
